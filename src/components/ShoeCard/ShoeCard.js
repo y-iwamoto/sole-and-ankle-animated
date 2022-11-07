@@ -75,13 +75,30 @@ const Link = styled.a`
 
 const Wrapper = styled.article``;
 
-const ImageWrapper = styled.div`
-  position: relative;
-`;
-
 const Image = styled.img`
   width: 100%;
   border-radius: 16px 16px 4px 4px;
+  transform: scale(1);
+  transition: transform 500ms;
+  
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+`;
+
+
+const ImageWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  & ${Image}:hover, ${Image}:focus {
+    transform: scale(1.1);
+    transition: transform 250ms;
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+      transform: scale(1);
+    } 
+  }
+  
 `;
 
 const Row = styled.div`
