@@ -20,12 +20,12 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale"><Normal>Sale</Normal><Emphasis>Sale</Emphasis></NavLink>
+          <NavLink href="/new"><Normal>New&nbsp;Releases</Normal><Emphasis>New&nbsp;Releases</Emphasis></NavLink>
+          <NavLink href="/men"><Normal>Men</Normal><Emphasis>Men</Emphasis></NavLink>
+          <NavLink href="/women"><Normal>Women</Normal><Emphasis>Women</Emphasis></NavLink>
+          <NavLink href="/kids"><Normal>Kids</Normal><Emphasis>Kids</Emphasis></NavLink>
+          <NavLink href="/collections"><Normal>Collections</Normal><Emphasis>Collections</Emphasis></NavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -120,10 +120,42 @@ const NavLink = styled.a`
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  position: relative;
+  display: block;
 
   &:first-of-type {
     color: var(--color-secondary);
   }
+  
 `;
+const Normal = styled.span`
+  display: inline-block;
+  transform: rotateX(0);
+  transition: all 0.35s ease-in-out;
+  backface-visibility: hidden;
+  &:hover {
+    transform: rotateX(-180deg);
+    opacity: 0;
+  }
+`
 
+const Emphasis = styled.span`
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 0.35s ease;
+  transform: rotateX(90deg);
+  transform-origin: 0% 50%;
+  opacity: 0;
+  ${NavLink}:hover & {
+    transform: rotateX(0);
+    opacity: 1;
+    transition-delay: 0.15s;
+    font-weight: bold;
+  }
+  
+`
 export default Header;
