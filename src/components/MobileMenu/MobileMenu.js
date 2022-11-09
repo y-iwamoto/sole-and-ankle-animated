@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 
 import { QUERIES, WEIGHTS } from '../../constants';
@@ -35,7 +35,25 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
     </Overlay>
   );
 };
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
+const fadeRightAnime = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
 const Overlay = styled(DialogOverlay)`
   position: fixed;
   top: 0;
@@ -45,6 +63,15 @@ const Overlay = styled(DialogOverlay)`
   background: var(--color-backdrop);
   display: flex;
   justify-content: flex-end;
+  
+  animation-name: ${fadeIn};
+  animation-duration: 0.1s;
+  animation-fill-mode:forwards;
+  opacity:0;
+  @media (prefers-reduced-motion: reduce) {
+    animation: unset; 
+    opacity:1;
+  }
 `;
 
 const Content = styled(DialogContent)`
@@ -54,6 +81,15 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
+  
+  animation-name:${fadeRightAnime};
+  animation-duration:0.5s;
+  animation-fill-mode:forwards;
+  opacity:0;
+  @media (prefers-reduced-motion: reduce) {
+    animation: unset;
+    opacity:1;
+  }
 `;
 
 const CloseButton = styled(UnstyledButton)`
@@ -79,6 +115,15 @@ const NavLink = styled.a`
   &:first-of-type {
     color: var(--color-secondary);
   }
+  animation-name: ${fadeIn};
+  animation-duration: 2s;
+  animation-fill-mode:forwards;
+  opacity:0;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: unset;
+    opacity:1;
+  }
 `;
 
 const Filler = styled.div`
@@ -96,6 +141,16 @@ const SubLink = styled.a`
   color: var(--color-gray-700);
   font-size: 0.875rem;
   text-decoration: none;
+
+  animation-name: ${fadeIn};
+  animation-duration: 2s;
+  animation-fill-mode:forwards;
+  opacity:0;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: unset;
+    opacity:1;
+  }
 `;
 
 export default MobileMenu;
