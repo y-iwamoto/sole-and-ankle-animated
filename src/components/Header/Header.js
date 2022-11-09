@@ -133,6 +133,11 @@ const Normal = styled.span`
   transform: rotateX(0);
   transition: all 0.35s ease-in-out;
   backface-visibility: hidden;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
   &:hover {
     transform: rotateX(-180deg);
     opacity: 0;
@@ -150,6 +155,9 @@ const Emphasis = styled.span`
   transform: rotateX(90deg);
   transform-origin: 0% 50%;
   opacity: 0;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
   ${NavLink}:hover & {
     transform: rotateX(0);
     opacity: 1;
